@@ -1,0 +1,49 @@
+﻿@model SurucuKursu.Models.Haberler
+
+@{
+    ViewData["Title"] = "Haberler";
+    ViewData["locationOne"] = "Admin";
+    ViewData["locationTwo"] = "Haberler";
+    ViewData["locationThre"] = "Sil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Haberler</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Baslik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Metin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Metin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Medya)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Medya)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
