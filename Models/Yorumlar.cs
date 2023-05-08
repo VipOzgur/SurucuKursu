@@ -11,10 +11,13 @@ public partial class Yorumlar
 
     public long? ParentId { get; set; }
 
-    public string Ad { get; set; } = null!;
+	[Required]
+	public string Ad { get; set; } = null!;
 
-    public string Mail { get; set; } = null!;
+	[DataType(DataType.EmailAddress),Required]
+	public string Mail { get; set; } = null!;
 
+	[Required]
     public string? Metin { get; set; }
 
     public long? Yildiz { get; set; }

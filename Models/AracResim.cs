@@ -11,5 +11,6 @@ public partial class AracResim
 
     public long ParentId { get; set; }
 
+	[Required]
     public long Resimler { get; set; }
 }

@@ -11,5 +11,6 @@ public partial class Galeri
 
     public string? Aciklama { get; set; }
 
-    public long Resim { get; set; }
+	[Required]
+	public long Resim { get; set; }
 }

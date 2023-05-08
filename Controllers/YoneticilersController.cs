@@ -57,9 +57,10 @@ namespace SurucuKursu.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
         {
+
             if (ModelState.IsValid)
             {
-                
+                yoneticiler.SetPasword(yoneticiler.Pasword);
                 _context.Add(yoneticiler);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

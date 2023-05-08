@@ -9,6 +9,7 @@ public partial class Araclar
 	[Key]
 	public long Id { get; set; }
 
+	[Required]
     public string Adı { get; set; } = null!;
 
     public string? Plaka { get; set; }

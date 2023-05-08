@@ -10,12 +10,15 @@ public partial class Soru
 	public long Id { get; set; }
 
     public long? ParentId { get; set; }
+	
+	[Required]
+	public string Ad { get; set; } = null!;
 
-    public string Ad { get; set; } = null!;
+	[DataType(DataType.EmailAddress),Required]
+	public string Mail { get; set; } = null!;
 
-    public string Mail { get; set; } = null!;
-
-    public string Metin { get; set; } = null!;
+	[Required]
+	public string Metin { get; set; } = null!;
 
     public string? Cevap { get; set; }
 }

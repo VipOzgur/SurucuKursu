@@ -9,8 +9,10 @@ public partial class Haberler
 	[Key]
 	public long Id { get; set; }
 
+    [Required]
     public string Baslik { get; set; } = null!;
 
+    [Required]
     public string Metin { get; set; } = null!;
 
     public string? Medya { get; set; }
