@@ -9,88 +9,87 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class YoneticilersController : Controller
+    public class GaleriController : Controller
     {
         private readonly SkContext _context;
 
-        public YoneticilersController()
+        public GaleriController()
         {
             _context = new SkContext();
         }
 
-        // GET: Yoneticilers
+        // GET: Galeri
         public async Task<IActionResult> Index()
         {
-              return _context.Yoneticilers != null ? 
-                          View(await _context.Yoneticilers.ToListAsync()) :
-                          Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+              return _context.Galeris != null ? 
+                          View(await _context.Galeris.ToListAsync()) :
+                          Problem("Entity set 'SkContext.Galeris'  is null.");
         }
 
-        // GET: Yoneticilers/Details/5
+        // GET: Galeri/Details/5
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Galeris == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var galeri = await _context.Galeris
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (galeri == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(galeri);
         }
 
-        // GET: Yoneticilers/Create
+        // GET: Galeri/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Yoneticilers/Create
+        // POST: Galeri/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Create([Bind("Id,Aciklama,Resim")] Galeri galeri)
         {
             if (ModelState.IsValid)
             {
-                
-                _context.Add(yoneticiler);
+                _context.Add(galeri);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(galeri);
         }
 
-        // GET: Yoneticilers/Edit/5
+        // GET: Galeri/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Galeris == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler == null)
+            var galeri = await _context.Galeris.FindAsync(id);
+            if (galeri == null)
             {
                 return NotFound();
             }
-            return View(yoneticiler);
+            return View(galeri);
         }
 
-        // POST: Yoneticilers/Edit/5
+        // POST: Galeri/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Aciklama,Resim")] Galeri galeri)
         {
-            if (id != yoneticiler.Id)
+            if (id != galeri.Id)
             {
                 return NotFound();
             }
@@ -99,12 +98,12 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
-                    _context.Update(yoneticiler);
+                    _context.Update(galeri);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!YoneticilerExists(yoneticiler.Id))
+                    if (!GaleriExists(galeri.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +114,49 @@ namespace SurucuKursu.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(galeri);
         }
 
-        // GET: Yoneticilers/Delete/5
+        // GET: Galeri/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Galeris == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var galeri = await _context.Galeris
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (galeri == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(galeri);
         }
 
-        // POST: Yoneticilers/Delete/5
+        // POST: Galeri/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            if (_context.Yoneticilers == null)
+            if (_context.Galeris == null)
             {
-                return Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+                return Problem("Entity set 'SkContext.Galeris'  is null.");
             }
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler != null)
+            var galeri = await _context.Galeris.FindAsync(id);
+            if (galeri != null)
             {
-                _context.Yoneticilers.Remove(yoneticiler);
+                _context.Galeris.Remove(galeri);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool YoneticilerExists(long id)
+        private bool GaleriExists(long id)
         {
-          return (_context.Yoneticilers?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Galeris?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

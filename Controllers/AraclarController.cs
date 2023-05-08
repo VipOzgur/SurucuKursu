@@ -9,88 +9,87 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class YoneticilersController : Controller
+    public class AraclarController : Controller
     {
         private readonly SkContext _context;
 
-        public YoneticilersController()
+        public AraclarController()
         {
             _context = new SkContext();
         }
 
-        // GET: Yoneticilers
+        // GET: Araclar
         public async Task<IActionResult> Index()
         {
-              return _context.Yoneticilers != null ? 
-                          View(await _context.Yoneticilers.ToListAsync()) :
-                          Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+              return _context.Araclars != null ? 
+                          View(await _context.Araclars.ToListAsync()) :
+                          Problem("Entity set 'SkContext.Araclars'  is null.");
         }
 
-        // GET: Yoneticilers/Details/5
+        // GET: Araclar/Details/5
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Araclars == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var araclar = await _context.Araclars
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (araclar == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(araclar);
         }
 
-        // GET: Yoneticilers/Create
+        // GET: Araclar/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Yoneticilers/Create
+        // POST: Araclar/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Create([Bind("Id,Adı,Plaka")] Araclar araclar)
         {
             if (ModelState.IsValid)
             {
-                
-                _context.Add(yoneticiler);
+                _context.Add(araclar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(araclar);
         }
 
-        // GET: Yoneticilers/Edit/5
+        // GET: Araclar/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Araclars == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler == null)
+            var araclar = await _context.Araclars.FindAsync(id);
+            if (araclar == null)
             {
                 return NotFound();
             }
-            return View(yoneticiler);
+            return View(araclar);
         }
 
-        // POST: Yoneticilers/Edit/5
+        // POST: Araclar/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Adı,Plaka")] Araclar araclar)
         {
-            if (id != yoneticiler.Id)
+            if (id != araclar.Id)
             {
                 return NotFound();
             }
@@ -99,12 +98,12 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
-                    _context.Update(yoneticiler);
+                    _context.Update(araclar);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!YoneticilerExists(yoneticiler.Id))
+                    if (!AraclarExists(araclar.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +114,49 @@ namespace SurucuKursu.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(araclar);
         }
 
-        // GET: Yoneticilers/Delete/5
+        // GET: Araclar/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.Araclars == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var araclar = await _context.Araclars
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (araclar == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(araclar);
         }
 
-        // POST: Yoneticilers/Delete/5
+        // POST: Araclar/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            if (_context.Yoneticilers == null)
+            if (_context.Araclars == null)
             {
-                return Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+                return Problem("Entity set 'SkContext.Araclars'  is null.");
             }
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler != null)
+            var araclar = await _context.Araclars.FindAsync(id);
+            if (araclar != null)
             {
-                _context.Yoneticilers.Remove(yoneticiler);
+                _context.Araclars.Remove(araclar);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool YoneticilerExists(long id)
+        private bool AraclarExists(long id)
         {
-          return (_context.Yoneticilers?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Araclars?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

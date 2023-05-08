@@ -1,7 +1,7 @@
 ﻿@{
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,7 +82,7 @@
 								<img src="~/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
 								<div class="media-body">
 									<h3 class="dropdown-item-title">
-										Brad Diesel
+										Brad Diese
 										<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
 									</h3>
 									<p class="text-sm">Call me whenever you can...</p>
@@ -246,7 +246,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">
+							<a class="nav-link" asp-area="" asp-controller="Galeri" asp-action="Index">
 								<i class="nav-icon far fa-image"></i>
 								<p>
 									Galeri
@@ -258,6 +258,29 @@
 								<i class="nav-icon fas fa-columns"></i>
 								<p>
 									Haberler
+								</p>
+							</a>
+						</li><li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="HaberResim" asp-action="Index">
+								<i class="nav-icon fas fa-columns"></i>
+								<p>
+									Haber Resimleri
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="Araclar" asp-action="Index">
+								<i class="nav-icon fas fa-columns"></i>
+								<p>
+									Araçlar
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" asp-area="" asp-controller="AracResim" asp-action="Index">
+								<i class="nav-icon fas fa-columns"></i>
+								<p>
+									Araç Resimleri
 								</p>
 							</a>
 						</li>

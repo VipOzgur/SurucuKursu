@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SurucuKursu.Models;
 
 public partial class Egitmenler
 {
-    public long Id { get; set; }
+	[Key]
+	public long Id { get; set; }
 
     public string Ad { get; set; } = null!;
 

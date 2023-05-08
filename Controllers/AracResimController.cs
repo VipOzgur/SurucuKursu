@@ -9,88 +9,87 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class YoneticilersController : Controller
+    public class AracResimController : Controller
     {
         private readonly SkContext _context;
 
-        public YoneticilersController()
+        public AracResimController()
         {
             _context = new SkContext();
         }
 
-        // GET: Yoneticilers
+        // GET: AracResim
         public async Task<IActionResult> Index()
         {
-              return _context.Yoneticilers != null ? 
-                          View(await _context.Yoneticilers.ToListAsync()) :
-                          Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+              return _context.AracResims != null ? 
+                          View(await _context.AracResims.ToListAsync()) :
+                          Problem("Entity set 'SkContext.AracResims'  is null.");
         }
 
-        // GET: Yoneticilers/Details/5
+        // GET: AracResim/Details/5
         public async Task<IActionResult> Details(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.AracResims == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var aracResim = await _context.AracResims
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (aracResim == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(aracResim);
         }
 
-        // GET: Yoneticilers/Create
+        // GET: AracResim/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Yoneticilers/Create
+        // POST: AracResim/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Create([Bind("Id,ParentId,Resimler")] AracResim aracResim)
         {
             if (ModelState.IsValid)
             {
-                
-                _context.Add(yoneticiler);
+                _context.Add(aracResim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(aracResim);
         }
 
-        // GET: Yoneticilers/Edit/5
+        // GET: AracResim/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.AracResims == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler == null)
+            var aracResim = await _context.AracResims.FindAsync(id);
+            if (aracResim == null)
             {
                 return NotFound();
             }
-            return View(yoneticiler);
+            return View(aracResim);
         }
 
-        // POST: Yoneticilers/Edit/5
+        // POST: AracResim/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,ParentId,Resimler")] AracResim aracResim)
         {
-            if (id != yoneticiler.Id)
+            if (id != aracResim.Id)
             {
                 return NotFound();
             }
@@ -99,12 +98,12 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
-                    _context.Update(yoneticiler);
+                    _context.Update(aracResim);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!YoneticilerExists(yoneticiler.Id))
+                    if (!AracResimExists(aracResim.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +114,49 @@ namespace SurucuKursu.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(yoneticiler);
+            return View(aracResim);
         }
 
-        // GET: Yoneticilers/Delete/5
+        // GET: AracResim/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
-            if (id == null || _context.Yoneticilers == null)
+            if (id == null || _context.AracResims == null)
             {
                 return NotFound();
             }
 
-            var yoneticiler = await _context.Yoneticilers
+            var aracResim = await _context.AracResims
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (yoneticiler == null)
+            if (aracResim == null)
             {
                 return NotFound();
             }
 
-            return View(yoneticiler);
+            return View(aracResim);
         }
 
-        // POST: Yoneticilers/Delete/5
+        // POST: AracResim/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            if (_context.Yoneticilers == null)
+            if (_context.AracResims == null)
             {
-                return Problem("Entity set 'SkContext.Yoneticilers'  is null.");
+                return Problem("Entity set 'SkContext.AracResims'  is null.");
             }
-            var yoneticiler = await _context.Yoneticilers.FindAsync(id);
-            if (yoneticiler != null)
+            var aracResim = await _context.AracResims.FindAsync(id);
+            if (aracResim != null)
             {
-                _context.Yoneticilers.Remove(yoneticiler);
+                _context.AracResims.Remove(aracResim);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool YoneticilerExists(long id)
+        private bool AracResimExists(long id)
         {
-          return (_context.Yoneticilers?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.AracResims?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

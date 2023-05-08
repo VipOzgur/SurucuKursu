@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SurucuKursu.Models
 {
     public class ErrorViewModel
     {
-        public string? RequestId { get; set; }
+		[Key]
+		public string? RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
