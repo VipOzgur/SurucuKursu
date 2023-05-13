@@ -28,7 +28,7 @@ namespace SurucuKursu.Controllers
         [HttpPost]
         public async Task<IActionResult> Index([FromForm] Yoneticiler p)
         {
-            var bilgiler = _context.Yoneticilers.FirstOrDefault(x => x.KullaniciAdi == p.KullaniciAdi && x.Pasword==p.Hasher(p.Pasword));
+            var bilgiler = _context.Yoneticilers.FirstOrDefault(x => x.KullaniciAdi == p.KullaniciAdi && x.Pasword==p.Hash(p.Pasword));
             if (bilgiler != null) 
             {
                 List<Claim> claims = new List<Claim>() { 
@@ -37,14 +37,11 @@ namespace SurucuKursu.Controllers
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new AuthenticationProperties() {
-                    AllowRefresh = true,
-                    IsPersistent = Convert.ToBoolean(p.Durum)
+                    AllowRefresh = true //,
+                    //IsPersistent = p.Durum
                 };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),properties);
-
-                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(p.KullaniciAdi), p.Pasword);
                 return RedirectToAction("Index", "Admin");
-                
             }
             else
             {

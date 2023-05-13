@@ -6,3 +6,8 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@{
+	byte[] imageArray = System.IO.File.ReadAllBytes(@"D:\WorkSpace\SurucuKursu\wwwroot\img\user2-160x160.jpg");
+	string base64Image = Convert.ToBase64String(imageArray);
+    var img = new MemoryStream(Convert.FromBase64String(base64Image));
+}
