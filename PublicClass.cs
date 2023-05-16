@@ -1,24 +1,24 @@
-﻿using System.Text;
-using System.Security.Cryptography;
+﻿using System.Web;
+using System.IO;
+using System.Drawing;
 namespace SurucuKursu
 {
 	public class PublicClass
-	{
-		
-			public  string Hash(string input)
-			{
-				using (SHA256 sha256Hash = SHA256.Create())
-				{
-					byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+	{		
+		public string ImgToBase64(string path)
+		{
+            byte[] imageArray = System.IO.File.ReadAllBytes(path);
+            string base64Image = Convert.ToBase64String(imageArray);
+			return base64Image;
+        }
+		public void Base64ToImg(string base64)
+		{
+            byte[] bytes = Convert.FromBase64String(base64);
 
-					StringBuilder builder = new StringBuilder();
-					for (int i = 0; i < bytes.Length; i++)
-					{
-						builder.Append(bytes[i].ToString("x2"));
-					}
-					return builder.ToString();
-				}
-			}
-		
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                //pic.Image = Image.FromStream(ms);
+            }
+        }
 	}
 }

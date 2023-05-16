@@ -1,0 +1,64 @@
+﻿@model SurucuKursu.Models.Soru
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- contact section start -->
+<div class="contact_section layout_padding">
+    <div class="container-fluid">
+        <h1 class="ballet_text">İletişim</h1>
+        <p class="amet_text">  En yakın zamanda size döneceğiz </p>
+        <div class="contact_section2">
+            <div class="row">
+                <div class="col-md-6 padding_left_0">
+                    <div class="mail_section">
+                     
+              @*
+                        <input  asp-for="Ad" class="form-control mail_text" placeholder="Ad-Soyad" >
+                        @*<input type="number" class="mail_text" placeholder="Telefon Numarası" name="Phone Number">
+                        <input  asp-for="Mail" class="form-control mail_text" placeholder="Email" >
+                        <input asp-for="Metin" class="form-control massage_text" placeholder="Mesajınız" />
+                        <input type="submit" value="Gönder" /> class="btn btn-primary"*@
+
+                        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Ad" class="form-control mail_text" placeholder="Ad-Soyad" /> @*name atribute ekleyince hata veriyor hocaya sor
+                *@
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Mail" class="form-control mail_text" placeholder="Email"/>
+                <span asp-validation-for="Mail" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Metin" class="form-control massage_text" />
+                <span asp-validation-for="Metin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Gönder" />
+            </div>
+        </form>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6 padding_0">
+                    <div class="map-responsive">
+                        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact section end -->
+
+<script>
+        @if (TempData["FeedBack"] != null)
+        {
+            <text>alert("@TempData["FeedBack"].ToString()")</text>
+        }
+    </script>

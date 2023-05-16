@@ -59,6 +59,9 @@ namespace SurucuKursu.Controllers
         {
             if (ModelState.IsValid)
             {
+                //byte[] byteImg = new byte[galeri.Resim.ContentLenght];
+                
+
                 _context.Add(galeri);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
