@@ -55,7 +55,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Adı,Plaka")] Araclar araclar)
+        public async Task<IActionResult> Create([Bind("Id,Adı,Plaka")] AraclarMetaData araclar)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Adı,Plaka")] Araclar araclar)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Adı,Plaka")] AraclarMetaData araclar)
         {
             if (id != araclar.Id)
             {

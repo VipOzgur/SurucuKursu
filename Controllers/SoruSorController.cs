@@ -62,9 +62,12 @@ namespace SurucuKursu.Controllers
                 _context.Add(soru);
                 await _context.SaveChangesAsync();
                 TempData["FeedBack"] = "Sorunuz İletildi";
-                return RedirectToAction(nameof(Index));
             }
-                TempData["FeedBack"] = "Sorunuzun İletiminde Bir Hata Oluştu";
+            else
+            {
+ TempData["FeedBack"] = "Sorunuzun İletiminde Bir Hata Oluştu";
+            }
+               soru.IsPosted=true;
             return View(soru);
         }
 

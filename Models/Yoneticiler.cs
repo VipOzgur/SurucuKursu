@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System.Security.Cryptography;
-using System.Text;
-using SQLitePCL;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Mvc;
 using SurucuKursu.MetaData;
+using System;
+using System.Collections.Generic;
 
 namespace SurucuKursu.Models;
-[MetadataType(typeof(YoneticilerMetaData))]
+[ModelMetadataType(typeof(YoneticilerMetaData))]
 public partial class Yoneticiler
 {
     public long Id { get; set; }
@@ -20,9 +15,5 @@ public partial class Yoneticiler
 
     public string Pasword { get; set; } = null!;
 
-    public long? Durum
-    {
-        get;set;
-    }
-
+    public long? Durum { get; set; }
 }

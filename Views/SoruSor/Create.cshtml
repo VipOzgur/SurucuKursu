@@ -57,7 +57,7 @@
 <!-- contact section end -->
 
 <script>
-        @if (TempData["FeedBack"] != null)
+        @if (TempData["FeedBack"] != null && Model.IsPosted)
         {
             <text>alert("@TempData["FeedBack"].ToString()")</text>
         }

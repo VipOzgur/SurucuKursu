@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurucuKursu.MetaData
 {
@@ -17,5 +18,8 @@ namespace SurucuKursu.MetaData
         public string Pasword { get; set; } = null!;
 
         public long? Durum{get; set; }
+
+        [Required,NotMapped ]
+        public bool ChkDurum { get; set; }
     }
 }

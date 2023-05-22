@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace SurucuKursu.Models;
 
+[ModelMetadataType(typeof(AraclarMetaData))]
 public partial class Araclar
 {
-	[Key]
-	public long Id { get; set; }
+    public long Id { get; set; }
 
-	[Required]
     public string Adı { get; set; } = null!;
 
     public string? Plaka { get; set; }

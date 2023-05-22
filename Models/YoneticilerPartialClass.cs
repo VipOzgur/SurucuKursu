@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace SurucuKursu.Models
@@ -20,6 +21,15 @@ namespace SurucuKursu.Models
         public void SetPasword(string password)
         {
             Pasword = Hash(password);
+        }
+        [NotMapped]
+        public bool ChkDurum { 
+            get {
+                return Durum == 1 ? true : false;
+            }
+            set {
+                Durum = value ? 1 : 0;
+            }
         }
 
         public string Hash(string input)

@@ -40,7 +40,8 @@ public partial class SkContext : DbContext
     public virtual DbSet<Yorumlar> Yorumlars { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=.\\Data\\sk.db");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlite("Data Source=./Data/sk.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -147,7 +148,9 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Cevap).HasColumnName("cevap");
             entity.Property(e => e.Mail).HasColumnName("mail");
             entity.Property(e => e.Metin).HasColumnName("metin");
-            entity.Property(e => e.ParentId).HasColumnName("parentId");
+            entity.Property(e => e.Telefon).HasColumnName("telefon");
+            entity.Property(e => e.TipId).HasColumnName("tipId");
+            entity.Property(e => e.Visibility).HasColumnName("visibility");
         });
 
         modelBuilder.Entity<Yoneticiler>(entity =>

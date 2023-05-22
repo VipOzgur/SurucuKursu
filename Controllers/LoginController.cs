@@ -31,14 +31,17 @@ namespace SurucuKursu.Controllers
             var bilgiler = _context.Yoneticilers.FirstOrDefault(x => x.KullaniciAdi == p.KullaniciAdi && x.Pasword==p.Hash(p.Pasword));
             if (bilgiler != null) 
             {
+                p.Durum = p.ChkDurum ? 1 : 0;
+               await  _context.SaveChangesAsync();
+
                 List<Claim> claims = new List<Claim>() { 
                 new Claim(ClaimTypes.NameIdentifier,p.KullaniciAdi),
                 new Claim("OtherProperties","Admin")
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new AuthenticationProperties() {
-                    AllowRefresh = true //,
-                    //IsPersistent = p.Durum
+                    AllowRefresh = true ,
+                    IsPersistent = p.ChkDurum
                 };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),properties);
                 return RedirectToAction("Index", "Admin");

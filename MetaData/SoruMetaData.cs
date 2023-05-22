@@ -1,20 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SurucuKursu.MetaData;
-using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
-namespace SurucuKursu.Models;
-[ModelMetadataType(typeof(SoruMetaData))]
-public partial class Soru
+namespace SurucuKursu.MetaData;
+
+public class SoruMetaData
 {
     public long Id { get; set; }
 
     public long? TipId { get; set; }
-
+    [Required]
     public string Ad { get; set; } = null!;
-
+    [Required]
     public string Mail { get; set; } = null!;
-
+    [Required]
     public string Metin { get; set; } = null!;
 
     public string? Cevap { get; set; }
