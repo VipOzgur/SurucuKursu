@@ -35,6 +35,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 </head>
 <body>
+    <nav class="navbar sticky-top bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Sticky top</a>
+        </div>
+    </nav>
     <!-- header section start -->
     <div class="header_section">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,20 +56,45 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Hakkımızda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ehliyet</a>
-
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ehliyet</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Ehliyet Belgeleri</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Ehliyet Sınıfları</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Ehliyet Kullanım Yaşları</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Ehliyet Fiyatları</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Gerekli Evraklar</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Çıkmış Sorular</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">E-sınav (Elektronik) Nedir</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Stajyer Ehliyet Nedir</a>
+                                <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Ehliyet Randevu Al</a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ders Çalış</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ders Çalış</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Trafik Çevre Bilgisi</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Araç Tekniği</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">İlk Yardım Bilgisi</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Trafik Adabı</a>
+                            
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Yazılar</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Yazılar</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Bilgi</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Duyular</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">S.S.S</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">E-Sınav</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="OnKayit" asp-action="Create">Ön Kayıt</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="SoruSor" asp-action="Create">İletişim</a>
@@ -122,7 +152,7 @@
     <!-- Javascript files-->
     <script src="~/lib/frontendLib/js/jquery.min.js"></script>
     <script src="~/lib/frontendLib/js/popper.min.js"></script>
-    <script src="~/lib/frontendLib/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/frontendLib/js/jquery-3.0.0.min.js"></script>
     <script src="~/lib/frontendLib/js/plugin.js"></script>
     <!-- sidebar -->
