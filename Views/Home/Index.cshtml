@@ -1,13 +1,60 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@await Html.PartialAsync("~/Views/PartialViews/_PartialSlider.cshtml")
+@await Html.PartialAsync("~/Views/PartialViews/_PartialClases.cshtml")
+<!-- dancer section start -->
+<div class="dancer_section layout_padding">
+    <div class="container">
+        <h1 class="ballet_text">"Kaliteli Eğitimin Doğru Adresi"</h1>
+        <p class="amet_text">Kadıköy Sürücü Kursu İstanbul Kadıköy ilçesinde hizmet veren Kadıköy’ün en iyi ehliyet kursu, sürücü kursu olarak;</p>
+        <p class="amet_text_1">30 yıllık tecrübesi, bilgili ve ehliyet kursu alanında usta eğitmen kadrosu ile birlikte yüzlerce kursiyerine ehliyet sınavlarında üstün başarı sağlamış ve sonrasında ehliyet Sürücü Belgesi kazandırmış, uzun yıllardır ehliyet sürücü kursu sektöründe bilinen ve tanınan isim olarak marka yapmış Kadıköy  SÜRÜCÜ KURSU olarak aynı hizmeti siz değerli yeni sürücü kursu kursiyerlerimize ve mezun sürücülerimize aynı kalitede hizmet vermeye gurur ve sevinç ile devam ediyoruz.</p>
+        <div class="click_bt"><a href="#">Ön Kayıt Ol</a></div>
+    </div>
 </div>
-@{
-	byte[] imageArray = System.IO.File.ReadAllBytes(@"D:\WorkSpace\SurucuKursu\wwwroot\img\user2-160x160.jpg");
-	string base64Image = Convert.ToBase64String(imageArray);
-    var img = new MemoryStream(Convert.FromBase64String(base64Image));
-}
+<!-- dancer section end -->
+<!-- shortcode section start -->
+<div class="shortcode_section layout_padding">
+    <div class="container">
+        <h1 class="ballet_text">Neden Biz</h1>
+        <p class="amet_text">amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+        <div class="shortcode_section_2">
+            <div class="shortcode_left">
+                <h1 class="heading_text">Rekabetçi ve Uygun Fiyat</h1>
+                <p class="tempor_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
+            </div>
+            <div class="shortcode_right"><img src="images/img-3.png"></div>
+        </div>
+        <div class="shortcode_section_2">
+            <div class="shortcode_right"><img src="images/img-4.png"></div>
+            <div class="shortcode_left border_left_0">
+                <h1 class="heading_text_1">Alanında Uzman Kadro</h1>
+                <p class="tempor_text_1">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
+            </div>
+        </div>
+        <div class="shortcode_section_2">
+            <div class="shortcode_left">
+                <h1 class="heading_text">Son Model Araçlar</h1>
+                <p class="tempor_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
+            </div>
+            <div class="shortcode_right"><img src="images/img-5.png"></div>
+        </div>
+    </div>
+</div>
+<!-- shortcode section end -->
+@await Html.PartialAsync("~/Views/PartialViews/_PartialCommond.cshtml")
+
+<!-- contact section start -->
+<div class="contact_section layout_padding">
+    <div class="container-fluid">
+        <h1 class="ballet_text">İletişim</h1>
+        <p class="amet_text">amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
+        <div class="contact_section2">
+            <div class="row">
+                @await Html.PartialAsync("~/Views/PartialViews/_PartialContact.cshtml")
+                @await Html.PartialAsync("~/Views/PartialViews/_PartialMap.cshtml")
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact section end -->
