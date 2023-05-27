@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SurucuKursu.MetaData;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SurucuKursu.Models;
-[ModelMetadataType(typeof(SoruMetaData))]
+
 public partial class Soru
 {
     public long Id { get; set; }

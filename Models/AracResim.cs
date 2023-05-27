@@ -9,5 +9,5 @@ public partial class AracResim
 
     public long ParentId { get; set; }
 
-    public long Resimler { get; set; }
+    public string Resim { get; set; } = null!;
 }

@@ -51,7 +51,7 @@ public partial class SkContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ParentId).HasColumnName("parentId");
-            entity.Property(e => e.Resimler).HasColumnName("resimler");
+            entity.Property(e => e.Resim).HasColumnName("resim");
         });
 
         modelBuilder.Entity<Araclar>(entity =>
@@ -99,6 +99,7 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Aciklama).HasColumnName("aciklama");
             entity.Property(e => e.ParentId).HasColumnName("parentId");
+            entity.Property(e => e.Resim).HasColumnName("resim");
 
             entity.HasOne(d => d.Parent).WithMany(p => p.HaberResims)
                 .HasForeignKey(d => d.ParentId)
@@ -162,6 +163,7 @@ public partial class SkContext : DbContext
             entity.Property(e => e.KullaniciAdi).HasColumnName("kullaniciAdi");
             entity.Property(e => e.Meil).HasColumnName("meil");
             entity.Property(e => e.Pasword).HasColumnName("pasword");
+            entity.Property(e => e.Profil).HasColumnName("profil");
         });
 
         modelBuilder.Entity<Yorumlar>(entity =>
@@ -173,6 +175,7 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Mail).HasColumnName("mail");
             entity.Property(e => e.Metin).HasColumnName("metin");
             entity.Property(e => e.ParentId).HasColumnName("parentId");
+            entity.Property(e => e.Visibility).HasColumnName("visibility");
             entity.Property(e => e.Yildiz).HasColumnName("yildiz");
         });
 

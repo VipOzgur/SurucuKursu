@@ -18,6 +18,8 @@ namespace SurucuKursu.Controllers
             _context = new SkContext();
         }
 
+        PublicClass publicClass = new PublicClass();
+
         // GET: Galeri
         public async Task<IActionResult> Index()
         {
@@ -55,19 +57,24 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Aciklama,Resim")] Galeri galeri)
+        public async Task<IActionResult> Create([Bind("Id,Aciklama,Resim,ImageFile")] Galeri galeri)
         {
             if (ModelState.IsValid)
             {
-                //byte[] byteImg = new byte[galeri.Resim.ContentLenght];
-                
+                if (galeri.ImageFile != null && galeri.ImageFile.Length > 0)
+                {
+                    
+                    galeri.Resim=publicClass.ImgToBase64(galeri.ImageFile);
+                        _context.Add(galeri);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                }
 
-                _context.Add(galeri);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(galeri);
+            return View("Create","Galeri");
         }
+
+
 
         // GET: Galeri/Edit/5
         public async Task<IActionResult> Edit(long? id)

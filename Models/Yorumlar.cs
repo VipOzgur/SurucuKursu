@@ -16,4 +16,6 @@ public partial class Yorumlar
     public string? Metin { get; set; }
 
     public long? Yildiz { get; set; }
+
+    public long? Visibility { get; set; }
 }

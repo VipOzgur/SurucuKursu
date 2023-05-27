@@ -9,5 +9,5 @@ public partial class Galeri
 
     public string? Aciklama { get; set; }
 
-    public long Resim { get; set; }
+    public string? Resim { get; set; }
 }

@@ -11,5 +11,7 @@ public partial class HaberResim
 
     public string? Aciklama { get; set; }
 
+    public string? Resim { get; set; }
+
     public virtual Haberler Parent { get; set; } = null!;
 }
