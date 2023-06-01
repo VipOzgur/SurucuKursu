@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
 }
 
 <h1>Index</h1>
@@ -19,6 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Plaka)
             </th>
+            <th>
+                Resim
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,6 +35,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Plaka)
             </td>
+            <td>
+                
+                    @{
+                        var c= item.GetAracResims(item.Id);
+
+                        if(c!=null){
+                            @foreach(var ite in c){
+                            <text><img src="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" alt="base64 e dönüştürülmüş resim" style="height:80px; width:80px;">
+                            </text>
+                            }}
+                    }
+            </td>
+                    @item.Id
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

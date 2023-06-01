@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SurucuKursu.Models.Ehliyet>
+
+
+<table class="table col-10">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sinifi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    <div id="sinifi" style="font-size:50px; font-align:center;padding:20px;color:#65838C">
+                @Html.DisplayFor(modelItem => item.Sinifi)</div>
+            </td>
+            <td>
+                    <img src="data:image;base64,@Html.DisplayFor(modelItem => item.Arac)" alt="@Html.DisplayFor(modelItem=>item.Sinifi) Sınıfı Ehliyet" title="@Html.DisplayFor(modelItem=>item.Sinifi) Sınıfı Ehliyet" style="padding-top:10px; height:90px; width:130px;">
+            </td>
+                <td>
+                    <div id="tanimi" style="font-size:15px;margin-top:30px;line-height:22px">
+                        <center>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+                        </center>
+                        </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

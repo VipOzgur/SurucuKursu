@@ -17,10 +17,11 @@ namespace SurucuKursu.Controllers
         {
             _context = new SkContext();
         }
-
+        PublicClass publicClass = new PublicClass();
         // GET: Araclar
         public async Task<IActionResult> Index()
         {
+            
               return _context.Araclars != null ? 
                           View(await _context.Araclars.ToListAsync()) :
                           Problem("Entity set 'SkContext.Araclars'  is null.");
@@ -55,11 +56,21 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Adı,Plaka")] AraclarMetaData araclar)
+        public async Task<IActionResult> Create([FromForm] Araclar araclar)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(araclar);
+                _context.Araclars.Add(araclar); // Araclar nesnesini ekleyin
+
+                foreach (var file in araclar.ImageFile)
+                {
+                    var aracResim = new AracResim
+                    {
+                        Resim = publicClass.ImgToBase64(file)
+                    };
+
+                    araclar.AracResims.Add(aracResim); // Her bir resmi araclar.AracResims'e ekleyin
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -87,7 +98,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Adı,Plaka")] AraclarMetaData araclar)
+        public async Task<IActionResult> Edit(long id, [FromForm] Araclar araclar)
         {
             if (id != araclar.Id)
             {
@@ -99,6 +110,15 @@ namespace SurucuKursu.Controllers
                 try
                 {
                     _context.Update(araclar);
+                    foreach (var file in araclar.ImageFile)
+                    {
+                        var aracResim = new AracResim
+                        {
+                            Resim = publicClass.ImgToBase64(file)
+                        };
+
+                        araclar.AracResims.Add(aracResim); // Her bir resmi araclar.AracResims'e ekleyin
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -147,6 +167,13 @@ namespace SurucuKursu.Controllers
             var araclar = await _context.Araclars.FindAsync(id);
             if (araclar != null)
             {
+                var resims=_context.AracResims.Where(m => m.ParentId == id).ToList();
+                if (resims.Count > 0)
+                {
+                    foreach (var resim in resims) { 
+                    _context.AracResims.Remove(resim);
+                    }
+                }
                 _context.Araclars.Remove(araclar);
             }
             

@@ -55,10 +55,12 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ParentId,Resimler")] AracResim aracResim)
+        public async Task<IActionResult> Create([FromForm] AracResim aracResim)
         {
             if (ModelState.IsValid)
             {
+                PublicClass publicClass = new PublicClass();
+                aracResim.Resim = publicClass.ImgToBase64(aracResim.ImgFile);
                 _context.Add(aracResim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -118,7 +120,7 @@ namespace SurucuKursu.Controllers
         }
 
         // GET: AracResim/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        public async Task<IActionResult> Delete(long? id,long? ItemId)
         {
             if (id == null || _context.AracResims == null)
             {
@@ -147,11 +149,12 @@ namespace SurucuKursu.Controllers
             var aracResim = await _context.AracResims.FindAsync(id);
             if (aracResim != null)
             {
+                id = aracResim.ParentId; 
                 _context.AracResims.Remove(aracResim);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Edit", "Araclar", new {id=id});
         }
 
         private bool AracResimExists(long id)

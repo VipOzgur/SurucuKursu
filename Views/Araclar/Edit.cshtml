@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -24,6 +24,31 @@
                 <input asp-for="Plaka" class="form-control" />
                 <span asp-validation-for="Plaka" class="text-danger"></span>
             </div>
+            <div>
+                @{
+                    var c = Model.GetAracResims(Model.Id);
+
+                    if (c != null)
+                    {
+                        @foreach (var ite in c)
+                        {
+                            <text>
+                            <div>
+                         <img src="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" alt="base64 e dönüştürülmüş resim" style="height:80px; width:80px;"> <br/>
+                         <a asp-action="Delete" asp-controller="AracResim" asp-route-id="@ite.Id">Delete</a>
+                                </div>
+                            </text>
+                        }}
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" placeholder="Yeni Resim Ekle" id="imageInput" class="form-control" type="file" multiple />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div id="imagePreview"></div>
+            </div> 
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

@@ -23,6 +23,8 @@ public partial class SkContext : DbContext
 
     public virtual DbSet<Egitmenler> Egitmenlers { get; set; }
 
+    public virtual DbSet<Ehliyet> Ehliyets { get; set; }
+
     public virtual DbSet<Galeri> Galeris { get; set; }
 
     public virtual DbSet<HaberResim> HaberResims { get; set; }
@@ -52,6 +54,10 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ParentId).HasColumnName("parentId");
             entity.Property(e => e.Resim).HasColumnName("resim");
+
+            entity.HasOne(d => d.Parent).WithMany(p => p.AracResims)
+                .HasForeignKey(d => d.ParentId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Araclar>(entity =>
@@ -81,6 +87,13 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Ad).HasColumnName("ad");
             entity.Property(e => e.Profil).HasColumnName("profil");
             entity.Property(e => e.Soyad).HasColumnName("soyad");
+        });
+
+        modelBuilder.Entity<Ehliyet>(entity =>
+        {
+            entity.ToTable("Ehliyet");
+
+            entity.Property(e => e.Id).HasColumnName("id");
         });
 
         modelBuilder.Entity<Galeri>(entity =>

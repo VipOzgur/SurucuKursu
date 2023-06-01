@@ -22,7 +22,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ad,Sayad,TelNo,Mail,Aciklama")] OnKayit onKayit)
+        public async Task<IActionResult> Create([FromForm] OnKayit onKayit)
         {
             if (ModelState.IsValid)
             {

@@ -24,6 +24,23 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Plaka)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resim)
+        </dt>
+        <dd class = "col-sm-10">
+            @{
+                var c = Model.GetAracResims(Model.Id);
+
+                if (c != null)
+                {
+                    @foreach (var item in c)
+                    {
+                        <text>
+                            <img src="data:image;base64,@Html.DisplayFor(modelItem => item.Resim)" alt="base64 e dönüştürülmüş resim" style="height:80px; width:80px;">
+                        </text>
+                    }}
+            }
+        </dd>
     </dl>
     
     <form asp-action="Delete">
