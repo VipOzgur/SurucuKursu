@@ -7,8 +7,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
 {
+    x.Cookie.Name = "LoginCookie";
     x.LoginPath = "/Login/Index";
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+    x.LogoutPath = "/Login/LogOut";
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(8);
+    x.SlidingExpiration = true;
 });
 
 var app = builder.Build();

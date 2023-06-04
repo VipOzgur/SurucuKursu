@@ -7,13 +7,7 @@ namespace SurucuKursu.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
         private readonly SkContext _context;
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
 
         public HomeController()
         {
@@ -27,7 +21,9 @@ namespace SurucuKursu.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            PublicClass publicClass = new PublicClass();
+           TempData["hata"]= publicClass.SendEmail("vipozgurozkan@gmail.com", "Bu Bir Deneme Mesajıdır", "Privacy sayfasına giriş yapıldı");
+            return View(TempData["hata"]);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

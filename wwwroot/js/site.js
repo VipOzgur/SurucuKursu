@@ -17,3 +17,4 @@
         reader.readAsDataURL(file);
     }
 });
+

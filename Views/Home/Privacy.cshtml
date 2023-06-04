@@ -4,3 +4,9 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+<script>
+        @if (TempData["hata"] != null)
+        {
+            <text>alert("@TempData["hata"].ToString()")</text>
+        }
+    </script>

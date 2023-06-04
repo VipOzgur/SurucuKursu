@@ -1,46 +1,50 @@
-﻿@model SurucuKursu.Models.Haberler
+﻿@using Microsoft.AspNetCore.Html;
+@model SurucuKursu.Models.Haberler
 
 @{
-    ViewData["Title"] = "Haberler";
-    ViewData["locationOne"] = "Admin";
-    ViewData["locationTwo"] = "Haberler";
-    ViewData["locationThre"] = "Detay";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Haberler";
+	ViewData["locationOne"] = "Admin";
+	ViewData["locationTwo"] = "Haberler";
+	ViewData["locationThre"] = "Detay";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>Haberler</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Baslik)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Baslik)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Metin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Metin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Medya)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Medya)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tarih)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tarih)
-        </dd>
-    </dl>
+	<h4>Haberler</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Baslik)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Baslik)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Medya)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Medya)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Tarih)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Tarih)
+		</dd>
+	</dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+	<a asp-action="Index">Back to List</a>
+</div>
+
+<div>@Html.DisplayNameFor(model => model.Metin)</div>
+<br />
+<div>
+	@{
+		var metin = Html.Raw(Model.Metin);
+	}
+	@metin
 </div>

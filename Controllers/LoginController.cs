@@ -52,6 +52,11 @@ namespace SurucuKursu.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Login");
+        }
 
 
     }

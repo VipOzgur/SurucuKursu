@@ -27,8 +27,6 @@ public partial class SkContext : DbContext
 
     public virtual DbSet<Galeri> Galeris { get; set; }
 
-    public virtual DbSet<HaberResim> HaberResims { get; set; }
-
     public virtual DbSet<Haberler> Haberlers { get; set; }
 
     public virtual DbSet<Harclar> Harclars { get; set; }
@@ -41,9 +39,7 @@ public partial class SkContext : DbContext
 
     public virtual DbSet<Yorumlar> Yorumlars { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source=./Data/sk.db");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)=> optionsBuilder.UseSqlite("Data Source=./Data/sk.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -103,20 +99,6 @@ public partial class SkContext : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Aciklama).HasColumnName("aciklama");
             entity.Property(e => e.Resim).HasColumnName("resim");
-        });
-
-        modelBuilder.Entity<HaberResim>(entity =>
-        {
-            entity.ToTable("haberResim");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Aciklama).HasColumnName("aciklama");
-            entity.Property(e => e.ParentId).HasColumnName("parentId");
-            entity.Property(e => e.Resim).HasColumnName("resim");
-
-            entity.HasOne(d => d.Parent).WithMany(p => p.HaberResims)
-                .HasForeignKey(d => d.ParentId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Haberler>(entity =>
