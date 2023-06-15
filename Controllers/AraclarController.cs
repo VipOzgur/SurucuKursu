@@ -185,5 +185,43 @@ namespace SurucuKursu.Controllers
         {
           return (_context.Araclars?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-    }
+		// POST: AracResim/Delete/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteResim(string ids)
+		{
+            long id = 0;
+            string[] strings = ids.Split(',');
+			long[] longDizi = new long[strings.Length];
+            if (strings.Length > 0)
+            {
+				for(long s=0; s<strings.Length;s++)
+                {
+                    
+                    if (long.TryParse(strings[s], out long result)) 
+                    { 
+                    longDizi[s] = long.Parse(strings[s]);
+					}
+				}
+            }
+
+			if (_context.AracResims == null)
+			{
+				return Problem("Entity set 'SkContext.AracResims'  is null.");
+			}
+
+			foreach (var item in longDizi)
+			{
+				var aracResim = await _context.AracResims.FindAsync(item);
+				if (aracResim != null)
+				{
+					id = aracResim.ParentId;
+					_context.AracResims.Remove(aracResim);
+				}
+			}
+
+			await _context.SaveChangesAsync();
+			return RedirectToAction("Edit", "Araclar", new { id = id });
+		}
+	}
 }

@@ -29,8 +29,8 @@ namespace SurucuKursu
 
         public string SendEmail(string adres, string konu, string mesaj)
         {
-            string gmailUsername = "6eed0d244c70a9381dd931f4e4a57635";
-            string gmailPassword = "oxgfmjfyvsfizdjh";
+            string gmailUsername = "ozguris050@gmail.com";
+            string gmailPassword = "ozguris_is";
 
             // MailMessage nesnesi oluştur
             MailMessage mail = new MailMessage();
