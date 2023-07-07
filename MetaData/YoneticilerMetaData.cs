@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurucuKursu.MetaData
@@ -11,8 +12,8 @@ namespace SurucuKursu.MetaData
         [Required]
         public string KullaniciAdi { get; set; } = null!;
 
-        [DataType(DataType.EmailAddress), Required]
-        public string Meil { get; set; } = null!;
+		[DataType(DataType.EmailAddress), Required, DisplayName("E-Mail")]
+		public string Meil { get; set; } = null!;
 
         [Required, DataType(DataType.Password)]
         public string Pasword { get; set; } = null!;

@@ -16,12 +16,6 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipId)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Ad)
         </dt>
         <dd class = "col-sm-10">
@@ -38,6 +32,15 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Metin)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.IsPosted)*@ Anasayfada gönsün mü?
+        </dt> 
+        <dd class = "col-sm-10">
+            <input @if (Model.Visibility == 1)
+            {
+                <text>  checked= "checked" </text>
+            } disabled="disabled" style="height:30px; width:30px;" type="checkbox">
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cevap)

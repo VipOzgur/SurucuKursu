@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="~/lib/frontendLib/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/lib/frontendLib/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--LightBox Gallery-->
+    <link rel="stylesheet" href="~/lightbox/lightbox.css">
+    <link rel="stylesheet" href="~/lightbox/styles.css">
+    
 </head>
 <body>
     <nav class="navbar sticky-top bg-body-tertiary">
@@ -53,7 +57,17 @@
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Hakkımızda</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hakkımızda</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">Biz Kimiz?</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Galeri">Galeri</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Egitmenler">Eğitmen Kadromuz</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Araclar">Araç Filomuz</a>
+                            <div class="dropdown-divider"></div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ehliyet</a>
@@ -84,14 +98,15 @@
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Araç Tekniği</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">İlk Yardım Bilgisi</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Trafik Adabı</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" asp-action="CıkmısSorular" asp-controller="Home">Çıkmış Sorular</a>
                             </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Yazılar</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Bilgi</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Duyular</a>
-                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">S.S.S</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" asp-action="Index" asp-controller="Haber">Duyular|Haberler</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" asp-action="Index" asp-controller="SoruSor">S.S.S</a>
                             </div>
                     </li>
                     <li class="nav-item">
@@ -101,9 +116,9 @@
                         <a class="nav-link" asp-area="" asp-controller="SoruSor" asp-action="Create">İletişim</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+               @* <form class="form-inline my-2 my-lg-0">
                     <div class="search_icon"><a href="#"><img src="images/search-icon.png"></a></div>
-                </form>
+                </form>*@
             </div>
         </nav>
     </div>
@@ -162,5 +177,17 @@
     <!-- javascript -->
     <script src="js/owl.carousel.js"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <!-- lightbox -->
+    <script src="~/lightbox/lightbox-plus-jquery.js"></script>
+    @*<script src="~/lightbox/script.js"></script>*@
+    <script>
+        @if (ViewData["mesaj"] != null && ViewData["mesaj"].ToString() != "#")
+        {
+            <text>
+                alert(@ViewData["mesaj"].ToString());
+            </text>
+            ViewData["mesaj"] = "#";
+        }
+    </script>
 </body>
 </html>

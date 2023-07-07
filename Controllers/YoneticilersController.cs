@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
+    [Authorize]
     public class YoneticilersController : Controller
     {
         private readonly SkContext _context;
@@ -17,8 +19,9 @@ namespace SurucuKursu.Controllers
         {
             _context = new SkContext();
         }
-
+        PublicClass publicClass = new PublicClass();
         // GET: Yoneticilers
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.Yoneticilers != null ? 
@@ -45,6 +48,7 @@ namespace SurucuKursu.Controllers
         }
 
         // GET: Yoneticilers/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -53,14 +57,18 @@ namespace SurucuKursu.Controllers
         // POST: Yoneticilers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Create([FromForm] Yoneticiler yoneticiler)
         {
 
             if (ModelState.IsValid)
             {
-                yoneticiler.SetPasword(yoneticiler.Pasword);
+                if (yoneticiler.ImgFile != null && yoneticiler.ImgFile.Length > 0)
+                    yoneticiler.Profil = publicClass.ImgToBase64(yoneticiler.ImgFile);
+                   var sifre= yoneticiler.Hash(yoneticiler.Pasword);
+                yoneticiler.Pasword = sifre;
                 _context.Add(yoneticiler);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -81,6 +89,7 @@ namespace SurucuKursu.Controllers
             {
                 return NotFound();
             }
+            TempData["key"] = yoneticiler.Pasword;
             return View(yoneticiler);
         }
 
@@ -89,17 +98,21 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,KullaniciAdi,Meil,Pasword")] Yoneticiler yoneticiler)
+        public async Task<IActionResult> Edit(long id, [FromForm] Yoneticiler yoneticiler)
         {
             if (id != yoneticiler.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            
+            if (yoneticiler.KullaniciAdi !=null && yoneticiler.Meil != null)
             {
                 try
                 {
+                    if(yoneticiler.ImgFile!=null && yoneticiler.ImgFile.Length>0)
+                        yoneticiler.Profil = publicClass.ImgToBase64(yoneticiler.ImgFile);
+                    if (yoneticiler.newPassword != null)
+                        yoneticiler.Pasword= yoneticiler.Hash(yoneticiler.newPassword);
                     _context.Update(yoneticiler);
                     await _context.SaveChangesAsync();
                 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,8 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class EgitmenController : Controller
+	[Authorize]
+	public class EgitmenController : Controller
     {
         private readonly SkContext _context;
 
@@ -17,12 +19,13 @@ namespace SurucuKursu.Controllers
         {
             _context = new SkContext();
         }
+        PublicClass publicClass = new PublicClass();   
 
         // GET: Egitmen
         public async Task<IActionResult> Index()
         {
               return _context.Egitmenlers != null ? 
-                          View(await _context.Egitmenlers.ToListAsync()) :
+                          View(await _context.Egitmenlers.OrderByDescending(x => x.Id).ToListAsync()) :
                           Problem("Entity set 'SkContext.Egitmenlers'  is null.");
         }
 
@@ -55,10 +58,12 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ad,Soyad,Aciklama,Profil")] Egitmenler egitmenler)
+        public async Task<IActionResult> Create([FromForm] Egitmenler egitmenler)
         {
             if (ModelState.IsValid)
             {
+                if (egitmenler.ImgFile != null)
+                    egitmenler.Profil = publicClass.ImgToBase64(egitmenler.ImgFile);
                 _context.Add(egitmenler);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +92,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Ad,Soyad,Aciklama,Profil")] Egitmenler egitmenler)
+        public async Task<IActionResult> Edit(long id, [FromForm] Egitmenler egitmenler)
         {
             if (id != egitmenler.Id)
             {
@@ -98,6 +103,8 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
+                    if (egitmenler.ImgFile != null)
+                        egitmenler.Profil = publicClass.ImgToBase64(egitmenler.ImgFile);
                     _context.Update(egitmenler);
                     await _context.SaveChangesAsync();
                 }

@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SurucuKursu.Models;
-
+[ModelMetadataType(typeof(YoneticilerMetaData))]
 public partial class Yoneticiler
 {
     public long Id { get; set; }
@@ -13,7 +16,9 @@ public partial class Yoneticiler
 
     public string Pasword { get; set; } = null!;
 
-    public long? Durum { get; set; }
+    public string? Role { get; set; }
 
     public string? Profil { get; set; }
+
+    public long? Durum { get; set; }
 }

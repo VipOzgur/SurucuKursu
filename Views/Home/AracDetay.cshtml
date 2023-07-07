@@ -1,0 +1,53 @@
+﻿@model SurucuKursu.Models.Araclar
+
+@{
+    ViewData["Title"] = "AracDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Araclar</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Adı)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Adı)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Plaka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Plaka)
+        </dd>
+    </dl>
+</div>
+<h3>Resimler</h3>
+@{
+	var c = Model.GetAracResims(Model.Id);
+
+	if (c != null)
+	{
+		<text>
+			<div class="container">
+				<div class="gallery">
+
+					@foreach (var ite in c)
+					{
+						<text>
+							<div class="parent">
+								<a href="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" class="alink" data-lightbox="models" data-title="Resim">
+									<img class="resim" id="@ite.Id" src="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" alt="">
+								</a>
+							</div>
+						</text>
+					}
+				</div>
+			</div>
+		</text>
+	}
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

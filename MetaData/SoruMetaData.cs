@@ -10,8 +10,8 @@ public class SoruMetaData
     public long? TipId { get; set; }
     [Required]
     public string Ad { get; set; } = null!;
-    [Required]
-    public string Mail { get; set; } = null!;
+	[DataType(DataType.EmailAddress), Required, DisplayName("E-Mail")]
+	public string Mail { get; set; } = null!;
     [Required]
     public string Metin { get; set; } = null!;
 

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SurucuKursu.Models.Galeri>
+
+@{
+	ViewData["Title"] = "Galeri";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Galeri</h1>
+<br/>
+<div class="container">
+	<div class="gallery">
+
+		@foreach (var ite in Model)
+		{
+			<text>
+				<a href="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" class="alink" data-lightbox="models" data-title="@Html.DisplayFor(modelItem => ite.Aciklama)" style="border:solid 5px #ccc; border-radius: 10px;">
+					<img class="resim" src="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" alt="@Html.DisplayFor(modelItem => ite.Aciklama)" style="border-radius: 3px;">
+					</a>
+			</text>
+		}
+	</div>
+</div>

@@ -9,8 +9,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     x.Cookie.Name = "LoginCookie";
     x.LoginPath = "/Login/Index";
+    x.AccessDeniedPath = "/Login/Index";
     x.LogoutPath = "/Login/LogOut";
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(8);
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     x.SlidingExpiration = true;
 });
 

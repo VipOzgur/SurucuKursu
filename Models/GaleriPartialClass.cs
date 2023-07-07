@@ -5,6 +5,6 @@ namespace SurucuKursu.Models
     public partial class Galeri
     {
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public List<IFormFile> ImageFile { get; set; }
     }
 }

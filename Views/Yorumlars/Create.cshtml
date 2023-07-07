@@ -17,11 +17,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <input asp-for="ParentId" class="form-control" />
-                <span asp-validation-for="ParentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Ad" class="control-label"></label>
                 <input asp-for="Ad" class="form-control" />
                 <span asp-validation-for="Ad" class="text-danger"></span>
@@ -35,6 +30,11 @@
                 <label asp-for="Metin" class="control-label"></label>
                 <input asp-for="Metin" class="form-control" />
                 <span asp-validation-for="Metin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsPosted" class="control-label" style="text-align:center;">Anasayfa da görünsün mü?</label>
+                <input asp-for="IsPosted" type="checkbox" style="height:30px; width:30px; margin:15px 0px 0px 20px;" />
+                <span asp-validation-for="IsPosted" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Yildiz" class="control-label"></label>

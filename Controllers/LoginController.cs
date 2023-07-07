@@ -36,7 +36,8 @@ namespace SurucuKursu.Controllers
 
                 List<Claim> claims = new List<Claim>() { 
                 new Claim(ClaimTypes.NameIdentifier,p.KullaniciAdi),
-                new Claim("OtherProperties","Admin")
+                new Claim(ClaimTypes.Role,(bilgiler.Role!=null)?bilgiler.Role:"User"),
+                new Claim(ClaimTypes.Sid,Convert.ToString(bilgiler.Id)),
                 };
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
                 AuthenticationProperties properties = new AuthenticationProperties() {
@@ -52,6 +53,7 @@ namespace SurucuKursu.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
+        [AllowAnonymous]
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
+    [Authorize]
     public class YorumlarsController : Controller
     {
         private readonly SkContext _context;
@@ -21,9 +23,10 @@ namespace SurucuKursu.Controllers
         // GET: Yorumlars
         public async Task<IActionResult> Index()
         {
-              return _context.Yorumlars != null ? 
-                          View(await _context.Yorumlars.ToListAsync()) :
-                          Problem("Entity set 'SkContext.Yorumlars'  is null.");
+            return _context.Yorumlars != null ?
+                        View(await _context.Yorumlars.OrderByDescending(x => x.Id)
+  .ToListAsync()) :
+                        Problem("Entity set 'SkContext.Yorumlars'  is null.");
         }
 
         // GET: Yorumlars/Details/5
@@ -55,10 +58,11 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ParentId,Ad,Mail,Metin,Yildiz")] Yorumlar yorumlar)
+        public async Task<IActionResult> Create([FromForm] Yorumlar yorumlar)
         {
             if (ModelState.IsValid)
             {
+                yorumlar.Visibility = Convert.ToInt64(yorumlar.IsPosted);
                 _context.Add(yorumlar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -79,15 +83,15 @@ namespace SurucuKursu.Controllers
             {
                 return NotFound();
             }
+            yorumlar.IsPosted = (yorumlar.Visibility == 1);
             return View(yorumlar);
         }
 
         // POST: Yorumlars/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,ParentId,Ad,Mail,Metin,Yildiz")] Yorumlar yorumlar)
+        public async Task<IActionResult> Edit(long id, [FromForm] Yorumlar yorumlar)
         {
             if (id != yorumlar.Id)
             {
@@ -98,6 +102,7 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
+                    yorumlar.Visibility = Convert.ToInt64(yorumlar.IsPosted);
                     _context.Update(yorumlar);
                     await _context.SaveChangesAsync();
                 }
@@ -106,6 +111,7 @@ namespace SurucuKursu.Controllers
                     if (!YorumlarExists(yorumlar.Id))
                     {
                         return NotFound();
+                        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
                     }
                     else
                     {
@@ -131,7 +137,7 @@ namespace SurucuKursu.Controllers
             {
                 return NotFound();
             }
-
+            yorumlar.IsPosted = (yorumlar.Visibility == 1);
             return View(yorumlar);
         }
 
@@ -149,12 +155,29 @@ namespace SurucuKursu.Controllers
             {
                 _context.Yorumlars.Remove(yorumlar);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool YorumlarExists(long id)
+        
+        public async Task<IActionResult> AllVisibility()
+        {
+
+            var veri = _context.Yorumlars.ToList();
+            foreach (var v in veri)
+            { if (v != null) {
+                    v.Visibility = 0;
+
+                    _context.Yorumlars.Update(v);
+                }
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        
+        }
+
+		private bool YorumlarExists(long id)
         {
           return (_context.Yorumlars?.Any(e => e.Id == id)).GetValueOrDefault();
         }

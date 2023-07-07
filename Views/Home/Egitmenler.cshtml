@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SurucuKursu.Models.Egitmenler>
+
+@{
+    ViewData["Title"] = "Egitmenler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Egitmen Kadromuz</h1>   
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Profil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="data:image;base64,@Html.DisplayFor(modelItem => item.Profil)" alt="@Html.DisplayFor(modelItem => item.Ad)" style="height:120px; width:120px;">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

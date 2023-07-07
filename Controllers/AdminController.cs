@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SurucuKursu.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
-    [Authorize]
         public IActionResult Index()
         {
             return View();

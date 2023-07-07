@@ -4,9 +4,8 @@
 	ViewData["Title"] = "Edit";
 	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+<script src="~/lib/sweat-alert2/sweatalert.js"></script>
 <h1>Edit</h1>
-
 <h4>Araclar</h4>
 <hr />
 <div class="row">
@@ -65,12 +64,53 @@
 		</text>
 	}
 }
-<form asp-action="DeleteResim" asp-controller="Araclar" method="post">
+<form asp-action="DeleteResim" asp-controller="Araclar" method="post" id="myForm"  autocomplete="off">
 	<input type="hidden" name="ids" id="send" value="">
-	<input type="submit" class="btn btn-danger" id="submit" value="Resmi Sil" disabled>
+	@*<input type="submit" class="btn btn-danger" id="submit" value="Resmi Sil" disabled>*@
+	<button class="btn btn-danger" id="btnSubmit"  disabled>Resmi Sil</button>
 </form>
 
 <div>
 	<a asp-action="Index">Back to List</a>
 </div>
 
+
+	<script>
+		$(document).ready(function(){
+			//$("#btnSubmit").on("click",sweatAlet(){
+				this. .preventDefault();
+				Swal.fire({
+					title: 'Seçili resimler silinsin mi?',
+					icon: 'question',
+					showCancelButton: true,
+					confirmButtonText: 'Sil',
+					cancelButtonText: "İptal"
+				}).then((result) => {
+					console.log(result);
+					if (result.isConfirmed) {
+						$("#btnSubmit").on("click");
+						//myForm.off('submit');
+						//myForm.submit();
+					}
+				})
+			
+
+			///Deneme
+					$("#myForm").submit(function(){
+						console.log("myFormu aldı");
+				Swal.fire({
+					title: 'Seçili resimler silinsin mi?',
+					icon: 'question',
+					showCancelButton: true,
+					confirmButtonText: 'Sil',
+					cancelButtonText: "İptal"
+				}).then((result) => {
+					console.log(result);
+					if (!result.isConfirmed) {
+						return false;
+					}
+				})
+				});
+		
+		});
+	</script>

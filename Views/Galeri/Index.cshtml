@@ -1,42 +1,42 @@
 ﻿@model IEnumerable<SurucuKursu.Models.Galeri>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Galeri</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+	<a asp-action="Create" class="btn btn-primary">Resim Ekle</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Aciklama)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resim)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aciklama)
-            </td>
-            <td>
-                    <img src="data:image;base64,@Html.DisplayFor(modelItem => item.Resim)" alt="base64 e dönüştürülmüş resim" style="height:80px; width:80px;">
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+<div class="container">
+	<div class="gallery">
+
+		@foreach (var ite in Model)
+		{
+			<text>
+				<div class="parent" style="border:solid 5px #ccc; border-radius: 10px;">
+					<a href="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" class="alink" data-lightbox="models" data-title="@Html.DisplayFor(modelItem => ite.Aciklama)">
+						<img class="resim" id="@ite.Id" src="data:image;base64,@Html.DisplayFor(modelItem => ite.Resim)" alt="@Html.DisplayFor(modelItem => ite.Aciklama)" style="border-radius: 3px;">
+					</a>
+				</div>
+			</text>
+		}
+	</div>
+</div>
+<form asp-action="DeleteResim" asp-controller="Galeri" method="post" id="myForm" autocomplete="off">
+	<input type="hidden" name="ids" id="send" value="">
+	@*<input type="submit" class="btn btn-danger" id="submit" value="Resmi Sil" disabled>*@
+	<button class="btn btn-danger" id="btnSubmit" disabled>Resmi Sil</button>
+</form>
+@if (TempData["durum"] != null)
+{
+	var mesaj = TempData["durum"];
+	<text>
+		<script>
+			alert(@mesaj.ToString());
+		</script>
+	</text>
 }
-    </tbody>
-</table>

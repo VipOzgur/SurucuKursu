@@ -1,35 +1,29 @@
 
-    //Burası galery le alakalı
+    //Burası galery le alakalı /İnput ekliyorum
     $(document).ready(function () {
         $('.parent').each(function () {
           var id = $(this).find("img").attr("id");
           inputElement = '<input class="inputImg" type="checkbox" id="' + id + '">';
           $(this).append(inputElement);
         });
-      
+
+        //Aktif inputları alıp formdaki inputa atıyorum
         $(".inputImg").on("change", function () {
           if ($(this).is(":checked")) {
-            $(this).addClass("active");
+            $(this).addClass("aktifler");
           }else{
-            $(this).removeClass("active");
+              $(this).removeClass("aktifler");
           }
-            var ids =$('.active').map(function () {
+            var ids = $('.aktifler').map(function () {
             return this.id;
           }).get();
-          if (ids.length > 1) {
-            console.log(ids);
-            var p = $("#pTagi");
-            p.text(ids);
-  
+          if (ids.length > 0) {
               $("#send").attr("value", ids.join(","));
-            
-              $("#submit").prop("disabled", false);
-            }else{
+              $("#btnSubmit").prop("disabled", false);
+          }else{
               $("#send").attr("value","");
-              $("#pTagi").text("");
-              $("#submit").prop("disabled", true);
-            }
-          
+              $("#btnSubmit").prop("disabled", true);
+          }
         });
       
       });

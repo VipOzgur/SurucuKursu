@@ -6,16 +6,10 @@ namespace SurucuKursu.Models
 {
     public partial class Yoneticiler
     {
-        //[NotMapped]
-        //public bool ChkDurum
-        //{
-        //    get
-        //    {
-        //        if (Durum == null) { return false; }
-        //        return Durum.Value == 0 ? false : true;
-        //    }
-        //    set;
-        //}
+        [NotMapped]
+        public IFormFile? ImgFile { get; set; }
+        [NotMapped]
+        public string? newPassword { get; set; }
 
         //Şifre hashleme kodları
         public void SetPasword(string password)
@@ -26,6 +20,7 @@ namespace SurucuKursu.Models
         public bool ChkDurum { 
             get {
                 return Durum == 1 ? true : false;
+                
             }
             set {
                 Durum = value ? 1 : 0;

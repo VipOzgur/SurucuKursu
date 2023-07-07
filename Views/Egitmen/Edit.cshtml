@@ -14,7 +14,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -33,9 +33,13 @@
                 <span asp-validation-for="Aciklama" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Profil" class="control-label"></label>
-                <input asp-for="Profil" class="form-control" />
-                <span asp-validation-for="Profil" class="text-danger"></span>
+                <img src="data:image;base64,@Html.DisplayFor(model => model.Profil)" alt="Eğitmen Profil" style="height:180px; width:180px;">
+            </div>
+            <div class="form-group">
+                <label asp-for="ImgFile" class="control-label">Değiştir</label>
+                <input asp-for="ImgFile" class="form-control" type="file" />
+                <input asp-for="Profil" class="form-control" type="hidden" />
+                <span asp-validation-for="ImgFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

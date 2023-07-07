@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var yorumlar = (List<Yorumlar>)ViewData["yorumlar"];
 }
 @await Html.PartialAsync("~/Views/PartialViews/_PartialSlider.cshtml")
 @*@await Html.PartialAsync("~/Views/PartialViews/_PartialClases.cshtml")*@
@@ -9,7 +10,7 @@
         <h1 class="ballet_text">"Kaliteli Eğitimin Doğru Adresi"</h1>
         <p class="amet_text">Kadıköy Sürücü Kursu İstanbul Kadıköy ilçesinde hizmet veren Kadıköy’ün en iyi ehliyet kursu, sürücü kursu olarak;</p>
         <p class="amet_text_1">30 yıllık tecrübesi, bilgili ve ehliyet kursu alanında usta eğitmen kadrosu ile birlikte yüzlerce kursiyerine ehliyet sınavlarında üstün başarı sağlamış ve sonrasında ehliyet Sürücü Belgesi kazandırmış, uzun yıllardır ehliyet sürücü kursu sektöründe bilinen ve tanınan isim olarak marka yapmış Kadıköy  SÜRÜCÜ KURSU olarak aynı hizmeti siz değerli yeni sürücü kursu kursiyerlerimize ve mezun sürücülerimize aynı kalitede hizmet vermeye gurur ve sevinç ile devam ediyoruz.</p>
-        <div class="click_bt"><a href="#">Ön Kayıt Ol</a></div>
+        <div class="click_bt"><a asp-action="Create" asp-controller="OnKayit">Ön Kayıt Ol</a></div>
     </div>
 </div>
 <!-- dancer section end -->
@@ -42,7 +43,7 @@
     </div>
 </div>
 <!-- shortcode section end -->
-@await Html.PartialAsync("~/Views/PartialViews/_PartialCommond.cshtml")
+@Html.Partial("~/Views/PartialViews/_PartialCommond.cshtml",yorumlar)
 
 <!-- contact section start -->
 <div class="contact_section layout_padding">

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SurucuKursu.Models.Araclar>
+
+@{
+    ViewData["Title"] = "Araclar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Arac Filomuz</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Resim
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adı)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plaka)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @{
+                        var c = item.GetAracResims(item.Id);
+                        if (c != null)
+                        {
+                            <text>
+                                    <img src="data:image;base64,@Html.DisplayFor(modelItem => c[0].Resim)" alt="base64 e dönüştürülmüş resim" style="height:80px; width:80px;">
+                            </text>
+                        }
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adı)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plaka)
+            </td>
+            <td>
+                    <a asp-action="AracDetay" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

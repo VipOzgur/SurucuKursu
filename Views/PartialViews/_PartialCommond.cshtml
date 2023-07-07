@@ -1,37 +1,88 @@
-﻿
+﻿@model List<SurucuKursu.Models.Yorumlar>
+
+
+
 <!-- testimonial section start -->
 <div class="testimonial_section layout_padding">
-    <div class="container">
-        <h1 class="ballet_text">Yorumlar</h1>
-        <p class="amet_text">amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore </p>
-        <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="testimonial_section_2 layout_padding">
-                        <h1 class="emrold_text">Emre</h1>
-                        <p class="dummy_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial_section_2 layout_padding">
-                        <h1 class="emrold_text">Emine</h1>
-                        <p class="dummy_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial_section_2 layout_padding">
-                        <h1 class="emrold_text">Deniz</h1>
-                        <p class="dummy_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-                <i class="fa fa-left"><img src="images/left-icon.png"></i>
-            </a>
-            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-                <i class="fa fa-right"><img src="images/right-icon.png"></i>
-            </a>
-        </div>
-    </div>
+	<div class="container">
+		<h1 class="ballet_text">Yorumlar</h1>
+		<p class="amet_text">Yorumlarınız bizim için önemli </p>
+		<div id="main_slider" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				@foreach (var item in Model)
+				{
+					<div class="carousel-item @if(Model.IndexOf(item)==0){
+                <text> active</text>
+}">
+						<div class="testimonial_section_2 layout_padding">
+							<h1 class="emrold_text">@Html.DisplayFor(modelItem => item.Ad)</h1>
+								<p class="dummy_text">@Html.DisplayFor(modelItem => item.Metin) </p>
+						</div>
+					</div>
+				}@*
+				<div class="carousel-item">
+				<div class="testimonial_section_2 layout_padding">
+				<h1 class="emrold_text">Emine</h1>
+				<p class="dummy_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
+				</div>
+				</div>
+				<div class="carousel-item">
+				<div class="testimonial_section_2 layout_padding">
+				<h1 class="emrold_text">Deniz</h1>
+				<p class="dummy_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoconsectetur adipiscing </p>
+				</div>
+				</div>*@
+			</div>
+			<a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+				<i class="fa fa-left"><img src="images/left-icon.png"></i>
+			</a>
+			<a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+				<i class="fa fa-right"><img src="images/right-icon.png"></i>
+			</a>
+		</div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="align-content:center;" data-whatever="mdo">
+			Yorum Yap
+		</button>
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form asp-action="YorumCreate" id="YrmForm" asp-controller="Home">
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label">Adınız</label>
+								<input type="text" Name="Ad" class="form-control" id="recipient-name">
+							</div>
+							<div class="form-group">
+								<label for="recipient-name" class="col-form-label">Meiliniz</label>
+								<input type="email" Name="Mail" class="form-control" id="recipient-name">
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">Yorumunuz</label>
+								<textarea class="form-control" Name="Metin" id="message-text"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+						<button type="button" class="btn btn-primary" id="BtnSubmit">Gönder</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- testimonial section end -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+	$("#BtnSubmit").on("click",function(){
+	$("#YrmForm").submit();
+	});
+	});
+</script>

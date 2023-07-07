@@ -154,7 +154,6 @@ public partial class SkContext : DbContext
             entity.ToTable("yoneticiler");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Durum).HasColumnName("durum");
             entity.Property(e => e.KullaniciAdi).HasColumnName("kullaniciAdi");
             entity.Property(e => e.Meil).HasColumnName("meil");
             entity.Property(e => e.Pasword).HasColumnName("pasword");

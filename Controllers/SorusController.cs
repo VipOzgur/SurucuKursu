@@ -10,7 +10,8 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class SorusController : Controller
+	[Authorize]
+	public class SorusController : Controller
     {
         private readonly SkContext _context;
 
@@ -22,7 +23,8 @@ namespace SurucuKursu.Controllers
 		public async Task<IActionResult> Index()
         {
               return _context.Sorus != null ? 
-                          View(await _context.Sorus.ToListAsync()) :
+                          View(await _context.Sorus.OrderByDescending(x => x.Id)
+    .ToListAsync()) :
                           Problem("Entity set 'SkContext.Sorus'  is null.");
         }
 
@@ -55,10 +57,11 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ParentId,Ad,Mail,Metin,Cevap")] Soru soru)
+        public async Task<IActionResult> Create([FromForm] Soru soru)
         {
             if (ModelState.IsValid)
             {
+                soru.Visibility = Convert.ToInt64(soru.IsPosted);
                 _context.Add(soru);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -79,6 +82,7 @@ namespace SurucuKursu.Controllers
             {
                 return NotFound();
             }
+            soru.IsPosted = (soru.Visibility == 1);
             return View(soru);
         }
 
@@ -87,7 +91,7 @@ namespace SurucuKursu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,ParentId,Ad,Mail,Metin,Cevap")] Soru soru)
+        public async Task<IActionResult> Edit(long id, [FromForm] Soru soru)
         {
             if (id != soru.Id)
             {
@@ -98,7 +102,8 @@ namespace SurucuKursu.Controllers
             {
                 try
                 {
-                    _context.Update(soru);
+					soru.Visibility = Convert.ToInt64(soru.IsPosted);
+					_context.Update(soru);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -131,6 +136,8 @@ namespace SurucuKursu.Controllers
             {
                 return NotFound();
             }
+
+            soru.IsPosted = (soru.Visibility == 1);
 
             return View(soru);
         }

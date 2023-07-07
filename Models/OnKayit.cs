@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SurucuKursu.Models;
-
+[ModelMetadataType(typeof(OnKayitMetaData))]
 public partial class OnKayit
 {
     public long Id { get; set; }

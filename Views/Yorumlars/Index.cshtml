@@ -12,12 +12,11 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<br/>
+<a asp-action="AllVisibility" asp-controller="Yorumlars"  asp-area="" class="btn btn-danger">All Non visibilty</a>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ParentId)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ad)
             </th>
@@ -26,6 +25,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Metin)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.IsPosted)*@ Anasayfada görünsün mü?
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Yildiz)
@@ -37,9 +39,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ParentId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Ad)
             </td>
             <td>
@@ -47,6 +46,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Metin)
+            </td>
+            <td>
+                    <input @if (item.Visibility == 1)
+                    {
+                        <text>  checked= "checked" </text>
+                    } disabled="disabled" style="height:30px; width:30px;" type="checkbox">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Yildiz)

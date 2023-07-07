@@ -1,0 +1,46 @@
+﻿@model SurucuKursu.Models.Haberler
+
+@{
+    ViewData["Title"] = "Haber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+	<div>
+		<h4>Haberler</h4>
+		<hr />
+		<dl class="row">
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Baslik)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Baslik)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Medya)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Medya)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Tarih)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Tarih)
+			</dd>
+		</dl>
+	</div>
+	<div>
+		
+		<a asp-action="Index">haberlere geri dön</a>
+	</div>
+
+	<div>@Html.DisplayNameFor(model => model.Metin)</div>
+	<br />
+	<div style="position:center; text-align:center;">
+		@{
+			var metin = Html.Raw(Model.Metin);
+		}
+		@metin
+	</div>

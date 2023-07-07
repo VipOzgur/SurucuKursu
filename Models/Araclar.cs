@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SurucuKursu.Models;
-[MetadataType(typeof(AraclarMetaData))]
+[ModelMetadataType(typeof(AraclarMetaData))]
 public partial class Araclar
 {
     public long Id { get; set; }

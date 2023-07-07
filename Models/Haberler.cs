@@ -1,11 +1,11 @@
-﻿using SurucuKursu.MetaData;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace SurucuKursu.Models;
-[MetadataType(typeof(HaberlerMetaDataClass))]
+[ModelMetadataType(typeof(HaberlerMetaDataClass))]
 public partial class Haberler
 {
     public long Id { get; set; }

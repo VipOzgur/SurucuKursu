@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,8 @@ using SurucuKursu.Models;
 
 namespace SurucuKursu.Controllers
 {
-    public class HaberlersController : Controller
+	[Authorize]
+	public class HaberlersController : Controller
     {
         private readonly SkContext _context;
 
@@ -22,7 +24,7 @@ namespace SurucuKursu.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Haberlers != null ? 
-                          View(await _context.Haberlers.ToListAsync()) :
+                          View(await _context.Haberlers.OrderByDescending(x => x.Id).ToListAsync()) :
                           Problem("Entity set 'SkContext.Haberlers'  is null.");
         }
 

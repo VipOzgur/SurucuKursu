@@ -1,11 +1,11 @@
-﻿using SurucuKursu.MetaData;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurucuKursu.Models;
-[MetadataType(typeof(AracResimMetaDataClass))]
+[ModelMetadataType(typeof(AracResimMetaDataClass))]
 public partial class AracResim
 {
     public long Id { get; set; }
@@ -15,7 +15,4 @@ public partial class AracResim
     public string Resim { get; set; } = null!;
 
     public virtual Araclar Parent { get; set; } = null!;
-
-	[NotMapped]
-	public IFormFile? ImgFile { get; set; }
 }

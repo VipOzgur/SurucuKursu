@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SurucuKursu.MetaData;
+using System;
 using System.Collections.Generic;
 
 namespace SurucuKursu.Models;
-
+[ModelMetadataType(typeof(YorumlarMetaDataClass))]
 public partial class Yorumlar
 {
     public long Id { get; set; }
